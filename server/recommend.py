@@ -1,4 +1,4 @@
-import numpy as np
+import pandas as pd
 
 # normalize helper
 def normalize(val, minv, maxv):
@@ -8,23 +8,33 @@ def recommend_materials(product_input, materials_df, cost_model, co2_model, scal
 
     recommendations = []
 
+    cols = [
+        "weight_capacity_score",
+        "product_strength_req",
+        "barrier_score",
+        "reuse_potential_score",
+        "material_strength",
+        "biodegradability",
+        "recyclability_percent_y"
+    ]
+
     for _, material in materials_df.iterrows():
 
-        # combine product + material features
         combined = product_input + [
             material["material_strength"],
             material["biodegradability"],
             material["recyclability_percent"]
         ]
 
-        arr = np.array(combined).reshape(1,-1)
-        scaled = scaler.transform(arr)
+        # convert into dataframe with feature names
+        input_df = pd.DataFrame([combined], columns=cols)
 
-        # ML predictions
+        # scale properly
+        scaled = scaler.transform(input_df)
+
         cost = cost_model.predict(scaled)[0]
         co2 = co2_model.predict(scaled)[0]
 
-        # normalize for scoring
         cost_norm = normalize(cost,0,100)
         co2_norm = normalize(co2,0,100)
         bio_norm = normalize(material["biodegradability"],0,10)
@@ -42,7 +52,6 @@ def recommend_materials(product_input, materials_df, cost_model, co2_model, scal
             "suitability_score": float(round(suitability,3))
         })
 
-    # sort by best suitability
     top = sorted(recommendations,
                  key=lambda x: x["suitability_score"],
                  reverse=True)[:3]
