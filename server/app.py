@@ -12,13 +12,19 @@ CORS(app)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+DATA_DIR = os.path.join(BASE_DIR, "data")
+
 # load models
-cost_model = joblib.load("models/cost_model.pkl")
-co2_model = joblib.load("models/co2_model.pkl")
-scaler = joblib.load("models/scaler.pkl")
+cost_model = joblib.load(os.path.join(MODELS_DIR, "cost_model.pkl"))
+co2_model  = joblib.load(os.path.join(MODELS_DIR, "co2_model.pkl"))
+scaler     = joblib.load(os.path.join(MODELS_DIR, "scaler.pkl"))
+
+print("Models loaded from:", MODELS_DIR)
 
 # load materials
-materials = pd.read_csv("./data/materials_final.csv")
+materials_path = os.path.join(DATA_DIR, "materials_final.csv")
+materials = pd.read_csv(materials_path)
 
 # rename to match ML training features
 materials = materials.rename(columns={

@@ -8,7 +8,10 @@ from sklearn.ensemble import RandomForestRegressor
 from xgboost import XGBRegressor
 
 # load ML dataset
-df = pd.read_csv("./data/final_ml_dataset.csv")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+data_path = os.path.join(BASE_DIR, "data", "final_ml_dataset.csv")
+df = pd.read_csv(data_path)
 
 # filter only valid product-material pairs
 df = df[df["weight_capacity_score"] <= df["weight_cap"]]
@@ -58,10 +61,18 @@ co2_model = XGBRegressor(
 co2_model.fit(X_train2, y2_train)
 
 # -------- SAVE ----------
-os.makedirs("models",exist_ok=True)
+MODELS_DIR = os.path.join(BASE_DIR, "models")
+os.makedirs(MODELS_DIR, exist_ok=True)
 
-joblib.dump(cost_model,"models/cost_model.pkl")
-joblib.dump(co2_model,"models/co2_model.pkl")
-joblib.dump(scaler,"models/scaler.pkl")
+cost_model_path = os.path.join(MODELS_DIR, "cost_model.pkl")
+co2_model_path  = os.path.join(MODELS_DIR, "co2_model.pkl")
+scaler_path     = os.path.join(MODELS_DIR, "scaler.pkl")
 
+joblib.dump(cost_model, cost_model_path)
+joblib.dump(co2_model, co2_model_path)
+joblib.dump(scaler, scaler_path)
+
+print("Cost Model saved at:", cost_model_path)
+print("CO2 Model saved at:", co2_model_path)
+print("Scaler saved at:", scaler_path)
 print("MODELS TRAINED SUCCESSFULLY")
