@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EcoPackAI</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+
+<body>
+
+<h1>EcoPackAI Packaging Recommendation</h1>
+
+<div class="form-box">
+
+    <label>Weight Capacity Score</label>
+    <input id="weight" type="number">
+
+    <label>Product Strength Requirement</label>
+    <input id="strength" type="number">
+
+    <label>Barrier Requirement</label>
+    <input id="barrier" type="number">
+
+    <label>Reuse Potential</label>
+    <input id="reuse" type="number">
+
+    <button onclick="predict()">Recommend Packaging</button>
+
+</div>
+
+<h2>Top 3 Sustainable Materials</h2>
+
+<table id="result">
+    <thead>
+        <tr>
+            <th>Material</th>
+            <th>Cost Score</th>
+            <th>CO₂ Score</th>
+            <th>Suitability</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
