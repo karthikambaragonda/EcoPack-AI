@@ -26,11 +26,12 @@ def predict():
     data=request.get_json()
 
     product=[
-        data["weight_capacity_score"],
-        data["strength_score"],
-        data["barrier_score"],
-        data["reuse_potential_score"]
-    ]
+    data["weight_capacity_score"],
+    data["product_strength_req"],
+    data["barrier_score"],
+    data["reuse_potential_score"]
+]
+
 
     top=recommend_materials(product,materials,
                             cost_model,co2_model,scaler)
