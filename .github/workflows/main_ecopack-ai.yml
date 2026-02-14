@@ -38,7 +38,7 @@ jobs:
         with:
           name: python-app
          path: |
-  ./server
+                ./server
 
 
       # 🚫 Opting Out of Oryx Build
@@ -75,3 +75,4 @@ jobs:
           slot-name: 'Production'
 
           
+
