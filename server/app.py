@@ -7,7 +7,7 @@ from flask_cors import CORS
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*":{"origins":"*"}})
 
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
