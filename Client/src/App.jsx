@@ -231,7 +231,7 @@ ${selected?.material === m.material ? "" :
             ))}
 
           </div>
-          <br />
+ <br />
           {/* 🔥 DETAILS BOX */}
           {materials.length > 0 && (
             <div className="bg-green-50 border border-green-400
