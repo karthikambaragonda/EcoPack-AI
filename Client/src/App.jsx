@@ -11,7 +11,7 @@ import {
 } from "recharts";
 
 const api = axios.create({
-  baseURL: "http://127.0.0.1:5000",
+  baseURL: "https://ecopack-ai.azurewebsites.net",
   timeout: 28000
 });
 
