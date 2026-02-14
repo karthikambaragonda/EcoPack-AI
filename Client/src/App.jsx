@@ -137,6 +137,24 @@ function App() {
   return (
     <div className="bg-slate-50 min-h-screen font-sans text-slate-800 selection:bg-emerald-100">
 
+      {/* Custom Scrollbar Styles */}
+      <style>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f5f9;
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+      `}</style>
+
       {/* NAVBAR */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/80 border-b border-slate-200">
         <div className="max-w-6xl mx-auto px-4 md:px-6 py-4 flex justify-between items-center">
@@ -239,7 +257,8 @@ function App() {
                 )}
               </div>
 
-              <div className="flex-grow overflow-y-auto pr-1 custom-scrollbar">
+              {/* SCROLLABLE CONTAINER: ADDED max-h and overflow */}
+              <div className="max-h-[320px] overflow-y-auto pr-2 custom-scrollbar">
                 {loading ? (
                   <div className="space-y-4">
                     <SkeletonCard />
