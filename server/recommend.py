@@ -54,6 +54,6 @@ def recommend_materials(product_input, materials_df, cost_model, co2_model, scal
 
     top = sorted(recommendations,
                  key=lambda x: x["suitability_score"],
-                 reverse=True)[:3]
+                 reverse=True)[:]
 
     return top
